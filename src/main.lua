@@ -50,16 +50,18 @@ function myGameSetUp()
     --       your other sprites.
 
     local backgroundImage = gfx.image.new( "/assets/images/background" )
-    assert( backgroundImage )
+    print(assert( backgroundImage ))
 
     gfx.sprite.setBackgroundDrawingCallback(
         function( x, y, width, height )
             -- x,y,width,height is the updated area in sprite-local coordinates
             -- The clip rect is already set to this area, so we don't need to set it ourselves
+            gfx.drawRoundRect(200,120, 10,20, 20)
             backgroundImage:draw( 0, 0 )
         end
     )
     gfx.drawText("uhhh", 120, 120)
+
 
 
 end
@@ -75,7 +77,9 @@ myGameSetUp()
 -- Use this function to poll input, run game logic, and move sprites.
 
 function playdate.update()
-        -- print(playerSprite:getPosition())
+
+     print(playerSprite:getPosition())
+    -- print(type(playerSprite:getPosition()))
     -- Poll the d-pad and move our player accordingly.
     -- (There are multiple ways to read the d-pad; this is the simplest.)
     -- Note that it is possible for more than one of these directions
@@ -92,6 +96,24 @@ function playdate.update()
     end
     if playdate.buttonIsPressed( playdate.kButtonLeft ) then
         playerSprite:moveBy( -2, 0 )
+    end
+
+    if playerSprite.x <= -40 then
+        playerSprite:moveTo(404, playerSprite.y)
+    end
+
+    if playerSprite.x >= 410 then
+      playerSprite:moveTo(-40, playerSprite.y)
+    end
+
+    if playerSprite.y >= 274 then
+      print("down")
+      playerSprite:moveTo(playerSprite.x, -38)
+    end
+
+    if playerSprite.y <= -40 then
+      print("up")
+      playerSprite:moveTo(playerSprite.x, 272)
     end
 
     -- Call the functions below in playdate.update() to draw sprites and keep
