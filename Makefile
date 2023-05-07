@@ -1,39 +1,46 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
-LDFLAGS = -lraylib -lplaydate
-SRC_DIR = src
-ASSETS_DIR = assets
-BUILD_DIR = build
-BIN = bin
+HEAP_SIZE      = 8388208
+STACK_SIZE     = 61800
 
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-ASSET_FILES = $(wildcard $(ASSETS_DIR)/*)
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
+PRODUCT = Olympus.pdx
 
-.PHONY: all clean run
+# Locate the SDK
+SDK = ${PLAYDATE_SDK_PATH}
+ifeq ($(SDK),)
+	SDK = $(shell egrep '^\s*SDKRoot' ~/.Playdate/config | head -n 1 | cut -c9-)
+endif
 
-all: $(BIN)
+ifeq ($(SDK),)
+$(error SDK path not found; set ENV value PLAYDATE_SDK_PATH)
+endif
 
-$(BIN): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+######
+# IMPORTANT: You must add your source folders to VPATH for make to find them
+# ex: VPATH += src1:src2
+######
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+VPATH += src
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+# List C source files here
+SRC = src/main.c
 
-$(ASSETS_DIR)/%.png: | $(ASSETS_DIR)
-$(ASSETS_DIR)/%.ttf: | $(ASSETS_DIR)
-$(ASSETS_DIR)/%.wav: | $(ASSETS_DIR)
+# List all user directories here
+UINCDIR = 
 
-$(ASSETS_DIR):
-	mkdir -p $(ASSETS_DIR)
+# List user asm files
+UASRC = 
 
-clean:
-	rm -rf $(BUILD_DIR) $(BIN)
+# List all user C define here, like -D_DEBUG=1
+UDEFS = 
 
-run: $(BIN) $(ASSET_FILES)
-	./$(BIN)
+# Define ASM defines here
+UADEFS = 
+
+# List the user directory to look for the libraries here
+ULIBDIR =
+
+# List all user libraries here
+ULIBS =
+
+include $(SDK)/C_API/buildsupport/common.mk
 
 

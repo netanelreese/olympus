@@ -11,7 +11,7 @@ int main(int argc, char* argv)
     // Initialize the Raylib window
     const int screenWidth = 400;
     const int screenHeight = 240;
-    InitWindow(screenWidth, screenHeight, "My Playdate Game");
+    InitWindow(screenWidth, screenHeight, "Olympus");
 
     // Set up the game loop
     while (!WindowShouldClose()) {

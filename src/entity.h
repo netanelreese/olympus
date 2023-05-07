@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <raylib.h>
+#include "raylib.h"
 
 typedef struct {
     Vector2 position;

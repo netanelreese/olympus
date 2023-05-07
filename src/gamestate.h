@@ -1,7 +1,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <raylib.h>
+#include "raylib.h"
 
 typedef struct {
     // Game state data...
