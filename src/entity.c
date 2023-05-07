@@ -1,25 +1,19 @@
-#include "raylib.h"
 #include "entity.h"
 
-Entity_t entityNew(float x, float y, float w, float h)
-{
-    Entity_t e;
-
-    e.x = x;
-    e.y = y;
-    e.w = w;
-    e.h = h;
-
-    return e;
+void InitEntity(Entity* entity, Vector2 position, Vector2 velocity, Color color) {
+    entity->position = position;
+    entity->velocity = velocity;
+    entity->color = color;
 }
 
-void entityUpdate(Entity_t *e, float deltaTime)
-{
-    // update code goes here
+void UpdateEntity(Entity* entity) {
+    // Update the entity's position based on its velocity...
+    entity->position.x += entity->velocity.x;
+    entity->position.y += entity->velocity.y;
 }
 
-void entityDraw(Entity_t *e)
-{
-    // drawing code goes here
+void DrawEntity(Entity* entity) {
+    // Draw the entity...
+    DrawCircle(entity->position.x, entity->position.y, 10.0f, entity->color);
 }
 

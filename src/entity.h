@@ -1,15 +1,17 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-typedef struct Entity
-{
-    float x, y;
-    float w, h;
-} Entity_t;
+#include <raylib.h>
 
-Entity_t entityNew(float x, float y, float w, float h);
-void entityUpdate(Entity_t *e, float deltaTime);
-void entityDraw(Entity_t *e);
+typedef struct {
+    Vector2 position;
+    Vector2 velocity;
+    Color color;
+} Entity;
 
-#endif
+void InitEntity(Entity* entity, Vector2 position, Vector2 velocity, Color color);
+void UpdateEntity(Entity* entity);
+void DrawEntity(Entity* entity);
+
+#endif // ENTITY_H
 

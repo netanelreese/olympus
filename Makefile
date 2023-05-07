@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
-LDFLAGS = -lraylib
+LDFLAGS = -lraylib -lplaydate
 SRC_DIR = src
 ASSETS_DIR = assets
 BUILD_DIR = build

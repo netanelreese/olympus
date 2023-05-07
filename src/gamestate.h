@@ -1,19 +1,15 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-typedef struct GameState
-{
-    void (*enter)(void *);
-    void (*leave)(void *);
-    void (*update)(float);
-    void (*draw)();
-} GameState_t;
+#include <raylib.h>
 
-void gameStateSwitch(char *stateName, void *data);
-GameState_t *gameStateGetState(char *stateName);
-GameState_t *gameStateGetCurrentState();
-void gameStateUpdate(float deltaTime);
-void gameStateDraw();
+typedef struct {
+    // Game state data...
+} GameState;
 
-#endif
+void InitGameState(GameState* state);
+void UpdateGameState(GameState* state);
+void DrawGameState(GameState* state);
+
+#endif // GAMESTATE_H
 
