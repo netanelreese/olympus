@@ -15,6 +15,7 @@ import "CoreLibs/timer"
 -- NOTE: Because it's local, you'll have to do it in every .lua source file.
 
 local gfx <const> = playdate.graphics
+local pd <const> = playdate
 
 -- Here's our player sprite declaration. We'll scope it to this file because
 -- several functions need to access it.
@@ -31,6 +32,11 @@ function myGameSetUp()
 
     local playerImage = gfx.image.new("/assets/images/plater")
     assert( playerImage ) -- make sure the image was where we thought
+
+    local gameFont = gfx.font.new("/assets/fonts/namco")
+    assert(gameFont)
+    gfx.setFont(gameFont)
+    print(gfx.getFont())
 
     playerSprite = gfx.sprite.new( playerImage )
     playerSprite:moveTo( 200, 120 ) -- this is where the center of the sprite is placed; (200,120) is the center of the Playdate screen
@@ -53,6 +59,8 @@ function myGameSetUp()
             backgroundImage:draw( 0, 0 )
         end
     )
+    gfx.drawText("uhhh", 120, 120)
+
 
 end
 
@@ -67,7 +75,7 @@ myGameSetUp()
 -- Use this function to poll input, run game logic, and move sprites.
 
 function playdate.update()
-
+        -- print(playerSprite:getPosition())
     -- Poll the d-pad and move our player accordingly.
     -- (There are multiple ways to read the d-pad; this is the simplest.)
     -- Note that it is possible for more than one of these directions
