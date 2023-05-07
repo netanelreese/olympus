@@ -4,7 +4,7 @@ LDFLAGS = -lraylib
 SRC_DIR = src
 ASSETS_DIR = assets
 BUILD_DIR = build
-BIN = my-game
+BIN = bin
 
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 ASSET_FILES = $(wildcard $(ASSETS_DIR)/*)
